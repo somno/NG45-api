@@ -1,0 +1,69 @@
+openapi: 3.0.0
+
+info:
+  title: NG45 API
+  description: simple api to output NG45 periopertaive test recommendations
+  version: '0.1'
+
+paths:
+  /ng45:
+    put:
+      description: Returns array of tests
+      responses:
+        '200':
+          description: JSON array of tests and recommendation for performing them
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/tests"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/pmh"
+
+
+
+components:
+  schemas:
+    tests:
+      type: object
+      properties:
+        full_blood_count:
+          type: string
+        kidney_function:
+          type: string
+        ecg:
+          type: string
+      example:
+        full_blood_count: "Consider"
+        kidney_function: "Yes"
+        ecg: "Not Routinely"
+    pmh:
+      type: object
+      properties:
+        asa:
+          type: integer
+        age:
+          type: number
+        diabetes:
+          type: boolean
+        surgery:
+          type: string
+        intraperitoneal:
+          type: boolean
+        ckd:
+          type: boolean
+        cardiac:
+          type: boolean
+        liver:
+          type: boolean
+      example:
+        age: 45
+        asa: 3
+        surgery: "major"
+        cardiac: true
+        intraperitoneal: True
+        ckd: False
+        diabetes: false
+        liver: false
